@@ -5,7 +5,7 @@
 import * as Sequelize from 'sequelize';
 import * as Bluebird from 'bluebird';
 import * as _ from 'lodash';
-import assertCore from 'assert';
+import assertCore from 'server/node_modules/assert/build/assert';
 import assert from 'assert-fine';
 
 interface IModelAttribute {

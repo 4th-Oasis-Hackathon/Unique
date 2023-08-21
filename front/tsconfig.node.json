@@ -1,7 +1,0 @@
-{
-    "compilerOptions": {
-        "composite": true,
-        "moduleResolution": "bundler"
-    },
-    "include": ["vite.config.ts"]
-}

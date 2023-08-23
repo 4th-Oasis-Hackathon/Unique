@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 import env from '../env';
 import logger from '../lib/logger';
 import { User } from '../models/user.model';
+import { Post } from '../models/posts.model';
 import { validateSchemas } from './validate-schema';
 
 const sequelize = new Sequelize(env.mysql.schema, env.mysql.username, env.mysql.password, {
@@ -33,9 +34,11 @@ const sequelize = new Sequelize(env.mysql.schema, env.mysql.username, env.mysql.
 export { sequelize as mysql };
 
 export function initModels() {
-    // User.initModel(sequelize);
+    User.initModel(sequelize);
+    Post.initModel(sequelize);
 
 }
+
 export function connect() {
     return new Promise((resolve, reject) => {
         initModels();

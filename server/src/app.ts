@@ -16,7 +16,6 @@ function getOrigins() {
     return origins;
 }
 
-// https://1004lucifer.blogspot.com/2019/04/axios-response-headers-content.html
 app.use(
     cors({
         origin: getOrigins(),
@@ -55,7 +54,7 @@ app.listen(env.app.port, async function appMain() {
         console: false,
     });
 
-    logger.log(`[ ${env.mode.value}, ${JSON.stringify(env.config)} ] =========================================`);
+    logger.log(`[${env.mode.value}, ${JSON.stringify(env.config)} ] =========================================`);
 
     await mysql.connect();
 
@@ -63,5 +62,6 @@ app.listen(env.app.port, async function appMain() {
     logger.log(`🚀 App listening on the port ${env.app.port}`);
     logger.log(`============================================================================`);
 
-    console.log(`${new Date().toISOString()} [ 🚀 App listening on the port ${env.app.port}, ${env.mode.value} ] =================================== READY !!!`);
+    console.log(`🚀 App listening on the port ${env.app.port}`);
+    console.log(`${new Date().toISOString()} [${env.mode.value} ] =================================== READY !!!`);
 });

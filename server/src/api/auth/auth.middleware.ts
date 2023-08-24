@@ -23,7 +23,7 @@ export default class AuthMiddleWare {
 	}
 
 	isUser = async (req, res, next) => {
-		const { role } = req.body;
+		const role = req.body.role || UserRoles.GUEST;
 
 		try {
 			if (role < UserRoles.USER) throw new ApiError(ApiCodes.FORBIDDEN, "사용자만 접근 가능합니다.");

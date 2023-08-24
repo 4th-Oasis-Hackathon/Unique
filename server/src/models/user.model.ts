@@ -28,11 +28,11 @@ export class User extends Model<IUser> implements IUser {
                 name: {
                     type: DataTypes.STRING(100),
                     allowNull: true,
-                    unique: 'users_name_uindex',
                 },
                 email: {
                     type: DataTypes.STRING(100),
-                    allowNull: true,
+                    allowNull: false,
+                    unique: true,
                 },
                 password: {
                     type: DataTypes.STRING(100),
@@ -89,17 +89,11 @@ export class User extends Model<IUser> implements IUser {
                         fields: ['_id'],
                     },
                     {
-                        name: 'users__id_uindex',
+                        name: 'email',
                         unique: true,
                         using: 'BTREE',
-                        fields: ['_id'],
-                    },
-                    {
-                        name: 'users_name_uindex',
-                        unique: true,
-                        using: 'BTREE',
-                        fields: ['name'],
-                    },
+                        fields: ['email'],
+                    }
                 ],
             }
         );

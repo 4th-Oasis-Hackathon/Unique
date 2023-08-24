@@ -7,7 +7,7 @@ import PostState from '../../common/post.state';
 export default class PostController {
     list = async (req, res, next) => {
         let result;
-        const region = req.query.region || req.user.region;
+        const region = req.query.region;
 
         try {
             const attr = {
@@ -29,9 +29,9 @@ export default class PostController {
 
     get = async (req, res, next) => {
         let result;
+        const { id } = req.params;
 
         try {
-            const { id } = req.params;
             const user = await new PostService().get(id);
             result = Result.ok<any>(user).toJson();
         } catch (e: any) {
@@ -47,8 +47,7 @@ export default class PostController {
 
     create = async (req, res, next) => {
         let result;
-        const user = req.user;
-        const { title, content, files, likes} = req.body;
+        const { title, content, files, likes, author_id, author} = req.body;
 
         try {
             const postData = {
@@ -56,8 +55,8 @@ export default class PostController {
                 content,
                 files,
                 likes,
-                author_id: user.id,
-                author: user.name,
+                author_id,
+                author,
                 type: PostState.POST
             }
 
@@ -76,9 +75,9 @@ export default class PostController {
 
     delete = async (req, res, next) => {
         let result;
+        const { id } = req.params;
 
         try {
-            const { id } = req.params;
             await new PostService().delete(id);
             result = Result.ok<any>({
                 post: {
@@ -98,9 +97,9 @@ export default class PostController {
 
     like = async (req, res, next) => {
         let result;
+        const { id } = req.params;
 
         try {
-            const { id } = req.params;
             const post = await new PostService().like(id);
             result = Result.ok<any>(post).toJson();
         } catch (e: any) {
@@ -116,9 +115,9 @@ export default class PostController {
 
     unlike = async (req, res, next) => {
         let result;
+        const { id } = req.params;
 
         try {
-            const { id } = req.params;
             const post = await new PostService().unlike(id);
             result = Result.ok<any>(post).toJson();
         } catch (e: any) {
@@ -134,12 +133,11 @@ export default class PostController {
 
     report = async (req, res, next) => {
         let result;
-        const user = req.user;
-        const content = req.body.content;
+        const { content, user_id } = req.body;
+        const { id: postId } = req.params;
 
         try {
-            const { id } = req.params;
-            await new PostService().report(id, user.id, content);
+            await new PostService().report(postId, user_id, content);
             result = Result.ok<any>().toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));

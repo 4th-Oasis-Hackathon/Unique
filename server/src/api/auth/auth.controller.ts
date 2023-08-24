@@ -38,8 +38,16 @@ export default class AuthController {
         const { email, password } = req.params;
 
         try {
-            const Auth = await new AuthService().login(email, password);
-            result = Result.ok<any>(Auth).toJson();
+            const user = await new AuthService().login(email, password);
+            result = Result.ok<any>({
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    role: user.role,
+                    region: user.region,
+                }
+            }).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);

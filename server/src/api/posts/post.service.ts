@@ -48,8 +48,10 @@ export default class PostService {
         return await Post.create(postData);
     }
 
-    delete = async (id: number): Promise<number> => {
-        return await Post.destroy({
+    delete = async (id: number) => {
+        return await Post.update({
+            deleted_at: new Date()
+        }, {
             where: {
                 _id: id
             }

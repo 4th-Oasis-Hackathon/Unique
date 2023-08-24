@@ -12,6 +12,7 @@ export class User extends Model<IUser> implements IUser {
     salt?: string;
     role?: number;
     region?: string;
+    notice?: boolean;
     deleted_at?: Date;
     updated_at?: Date;
     created_at!: Date;
@@ -32,7 +33,6 @@ export class User extends Model<IUser> implements IUser {
                 email: {
                     type: DataTypes.STRING(100),
                     allowNull: false,
-                    unique: true,
                 },
                 password: {
                     type: DataTypes.STRING(100),
@@ -50,6 +50,11 @@ export class User extends Model<IUser> implements IUser {
                 region: {
                     type: DataTypes.STRING(100),
                     allowNull: true,
+                },
+                notice: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
+                    defaultValue: false,
                 },
                 deleted_at: {
                     type: DataTypes.DATE,
@@ -87,12 +92,6 @@ export class User extends Model<IUser> implements IUser {
                         unique: true,
                         using: 'BTREE',
                         fields: ['_id'],
-                    },
-                    {
-                        name: 'email',
-                        unique: true,
-                        using: 'BTREE',
-                        fields: ['email'],
                     }
                 ],
             }

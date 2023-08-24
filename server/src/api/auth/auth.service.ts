@@ -8,6 +8,7 @@ export default class AuthService {
         const exist = await User.findOne({
             where: {
                 email: userData.email,
+                deleted_at: null,
             },
         });
 
@@ -16,14 +17,17 @@ export default class AuthService {
         return await User.create(userData);
     }
 
-    login = async (email, password)=> {
+    login = async (email, password): Promise<User> => {
         const exist = await User.findOne({
             where: {
-                email
+                email,
+                deleted_at: null,
             },
         });
 
         const match = await exist.authenticate(password);
         assertTrue(match, new ApiError(ApiCodes.UNAUTHORIZED, 'Password is incorrect'));
+
+        return exist;
     }
 }

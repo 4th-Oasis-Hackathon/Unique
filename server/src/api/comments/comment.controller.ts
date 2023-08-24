@@ -7,13 +7,12 @@ import PostState from '../../common/post.state';
 export default class CommentController {
     create = async (req, res, next) => {
         let result;
-        const user = req.user;
-        const { content, parent_id } = req.body;
+        const { content, parent_id, author_id, author } = req.body;
 
         try {
             const commentData = {
-                author_id: user.id,
-                author: user.name,
+                author_id,
+                author,
                 content,
                 parent_id,
                 type: PostState.COMMENT,

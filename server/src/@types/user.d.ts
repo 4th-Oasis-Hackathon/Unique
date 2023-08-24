@@ -6,6 +6,7 @@ export interface IUser {
     salt?: string;
     role?: number;
     region?: string;
+    notice?: boolean;
     deleted_at?: Date;
     updated_at?: Date;
     created_at?: Date;

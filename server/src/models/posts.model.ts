@@ -5,22 +5,16 @@ import { IFile } from '../@types/file';
 
 export class Post extends Model<IPost> implements IPost {
     _id?: number;
-    author_id?: number;
-    author?: string;
-    title?: string;
-    content?: string;
-	files?: IFile[];
-	likes?: number;
+    author_id?: number; // Post, Comment, Message
+    author?: string; // Post, Comment, Message
+    title?: string; // Post, Comment, Message, Notice
+    content?: string; // Post, Comment, Message, Notice
+	files?: IFile[]; // Post, Notice
+	likes?: number; // Post, Comment
     type?: string;  // Post, Comment, Message, Notice
-
-    // posts
-    reported?: boolean;
-
-	// comments
-	parent_id?: number;
-
-	// Messages
-	receiver_id?: number;
+    reported?: boolean; // Post
+	parent_id?: number; // Comment
+	receiver_id?: number; // Message
 
     created_at?: Date;
     updated_at?: Date;

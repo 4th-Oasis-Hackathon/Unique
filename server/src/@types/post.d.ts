@@ -4,12 +4,14 @@ export interface IPost {
     _id?: number;
     author_id?: number;
     author?: string;
-	author_role?: number;
     title?: string;
     content?: string;
 	files?: IFile[];
 	likes?: number;
     type?: string;  // Post, Comment, Message, Notice
+
+    // posts
+    reported?: boolean;
 
 	// comments
 	parent_id?: number;

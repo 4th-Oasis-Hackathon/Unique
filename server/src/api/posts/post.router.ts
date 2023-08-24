@@ -1,9 +1,13 @@
 import { Router } from 'express';
-import UserController from './post.controller';
+import PostController from './post.controller';
 
 export const path = '/posts';
 export const router = Router();
 
-router.get('/', new UserController().list);
-router.post('/', new UserController().create);
-router.get('/:id', new UserController().get);
+router.get('/', new PostController().list);
+router.post('/', new PostController().create);
+router.get('/:id', new PostController().get);
+router.delete('/:id', new PostController().delete);
+router.put('/:id/like', new PostController().like);
+router.put('/:id/unlike', new PostController().unlike);
+router.post('/:id/report', new PostController().report);

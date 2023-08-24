@@ -7,12 +7,14 @@ export class Post extends Model<IPost> implements IPost {
     _id?: number;
     author_id?: number;
     author?: string;
-	author_role?: number;
     title?: string;
     content?: string;
 	files?: IFile[];
 	likes?: number;
     type?: string;  // Post, Comment, Message, Notice
+
+    // posts
+    reported?: boolean;
 
 	// comments
 	parent_id?: number;
@@ -41,10 +43,6 @@ export class Post extends Model<IPost> implements IPost {
                     type: DataTypes.STRING(100),
                     allowNull: true,
                 },
-                author_role: {
-                    type: DataTypes.INTEGER,
-                    allowNull: true,
-                },
                 title: {
                     type: DataTypes.STRING(100),
                     allowNull: true,
@@ -60,6 +58,11 @@ export class Post extends Model<IPost> implements IPost {
                 type: {
                     type: DataTypes.STRING(100),
                     allowNull: true,
+                },
+                reported: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: true,
+                    defaultValue: false,
                 },
                 parent_id: {
                     type: DataTypes.BIGINT,

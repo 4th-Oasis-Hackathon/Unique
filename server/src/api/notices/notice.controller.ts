@@ -5,9 +5,27 @@ import { Result } from '../../common/result';
 import PostState from '../../common/post.state';
 
 export default class NoticeController {
+    list = async (req, res, next) => {
+        let result;
+
+        try {
+            const notices = await new NoticeService().list();
+            result = Result.ok<any>({notices}).toJson();
+        } catch (e: any) {
+            logger.err(JSON.stringify(e));
+            logger.error(e);
+
+            result = Result.fail<Error>(e).toJson();
+        }
+
+        logger.res(httpStatus.OK, result, req);
+        res.status(httpStatus.OK).json(result);
+    }
+
     create = async (req, res, next) => {
         let result;
-        const { title, content, files } = req.body;
+        const { title, content } = req.body;
+        const files = req?.files;
 
         try {
             const noticeData = {
@@ -18,7 +36,7 @@ export default class NoticeController {
             };
 
             const notice = await new NoticeService().create(noticeData);
-            result = Result.ok<any>(notice).toJson();
+            result = Result.ok<any>({notice}).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);
@@ -37,7 +55,7 @@ export default class NoticeController {
         try {
             await new NoticeService().delete(id);
             result = Result.ok<any>({
-                post: {
+                notice: {
                     _id: id
                 }
             }).toJson();

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import CommentController from './comment.controller';
 import AuthMiddleWare from '../auth/auth.middleware';
 
-export const path = '/coments';
+export const path = '/comments';
 export const router = Router();
 
 router.post('/', new AuthMiddleWare().isUser, new CommentController().create);

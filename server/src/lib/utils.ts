@@ -1,26 +1,9 @@
 import dotenv from 'dotenv';
-import env from '../env';
-import { Decryptor, Encryptor } from 'strong-cryptor';
 import short from 'short-uuid';
 import logger from './logger';
-import { StateType } from '../common/state.type';
-import ApiError from '../common/api.error';
-import ApiCodes from '../common/api.codes';
-import ApiMessages from '../common/api.messages';
 import { Model } from 'sequelize';
 
 dotenv.config();
-
-export const generateRandomString = (length: number): string => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; ++i) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-};
 
 export const isValidUrl = (url) => {
     try {
@@ -29,20 +12,6 @@ export const isValidUrl = (url) => {
     } catch (err) {
         return false;
     }
-}
-
-export const encrypt = (value: string): string => {
-    if (!value) return value;
-
-    const crypto = new Encryptor({ key: env.auth.secret });
-    return crypto.encrypt(value);
-}
-
-export const decrypt = (value: string): string => {
-    if (!value) return value;
-
-    const crypto = new Decryptor({ key: env.auth.secret });
-    return crypto.decrypt(value);
 }
 
 export const uuid = (): string => {
@@ -200,16 +169,4 @@ export const assertNotNull = (value, error: Error) => {
 export const assertTrue = (value: boolean, error: Error) => {
     if (value === true) return;
     if (error instanceof Error) throw error;
-}
-
-export const assertStateActive = (state: StateType | string, detail = {})  => {
-    switch (state) {
-        default:
-        case StateType.WAITING:
-            throw new ApiError(ApiCodes.UNAUTHORIZED, ApiMessages.ACCOUNT_WAITING, detail);
-        case StateType.SUSPEND:
-            throw new ApiError(ApiCodes.UNAUTHORIZED, ApiMessages.ACCOUNT_LOCKED, detail);
-        case StateType.ACTIVE:
-            break;
-    }
 }

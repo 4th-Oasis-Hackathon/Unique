@@ -1,17 +1,14 @@
 import * as dotenv from 'dotenv';
-import * as path from 'server/node_modules/path/path';
+import * as path from '../node_modules/path/path';
 
 import {
     getOsEnv,
-    getOsEnvBool,
-    getOsEnvNumber,
-    getOsEnvNumberOptional,
     getOsEnvOptional,
     normalizePort,
 } from './lib/env';
 import appRoot from 'app-root-path';
 import fs from 'fs';
-import * as process from 'server/node_modules/process';
+import * as process from '../node_modules/process';
 
 /**
  * Load .env file or for tests the .env.test file.

@@ -10,10 +10,9 @@ CREATE TABLE users (
     role INT NOT NULL DEFAULT 0,
     region VARCHAR(100),
     notice BOOLEAN NOT NULL DEFAULT false,
-    deleted_at DATE,
-    updated_at DATE,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    INDEX PRIMARY KEY (_id)
+    deleted_at DATETIME,
+    updated_at DATETIME,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE posts (
@@ -22,15 +21,15 @@ CREATE TABLE posts (
     author VARCHAR(100),
     title VARCHAR(100),
     content VARCHAR(1024),
-    likes INT,
+    files JSON,
+    likes INT DEFAULT 0,
     type VARCHAR(100),
     reported BOOLEAN DEFAULT false,
     parent_id BIGINT,
     receiver_id BIGINT,
-    deleted_at DATE,
-    updated_at DATE,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    INDEX PRIMARY KEY (_id)
+    deleted_at DATETIME,
+    updated_at DATETIME,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 ```

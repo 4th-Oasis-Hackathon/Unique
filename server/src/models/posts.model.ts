@@ -45,16 +45,21 @@ export class Post extends Model<IPost> implements IPost {
                     type: DataTypes.STRING(1024),
                     allowNull: true,
                 },
+                files: {
+                    type: DataTypes.JSON,
+                    allowNull: true,
+                },
                 likes: {
                     type: DataTypes.INTEGER,
                     allowNull: true,
+                    defaultValue: 0,
                 },
                 type: {
                     type: DataTypes.STRING(100),
                     allowNull: true,
                 },
                 reported: {
-                    type: DataTypes.BOOLEAN,
+                    type: DataTypes.TINYINT,
                     allowNull: true,
                     defaultValue: false,
                 },
@@ -76,7 +81,7 @@ export class Post extends Model<IPost> implements IPost {
                 },
                 created_at: {
                     type: DataTypes.DATE,
-                    defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+                    defaultValue: new Date(),
                     allowNull: false,
                 },
             },

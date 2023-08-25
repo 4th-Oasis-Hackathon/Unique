@@ -52,7 +52,7 @@ export class User extends Model<IUser> implements IUser {
                     allowNull: true,
                 },
                 notice: {
-                    type: DataTypes.BOOLEAN,
+                    type: DataTypes.TINYINT,
                     allowNull: false,
                     defaultValue: false,
                 },
@@ -66,7 +66,7 @@ export class User extends Model<IUser> implements IUser {
                 },
                 created_at: {
                     type: DataTypes.DATE,
-                    defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+                    defaultValue: new Date(),
                     allowNull: false,
                 },
             },

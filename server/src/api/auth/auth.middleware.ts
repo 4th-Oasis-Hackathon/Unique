@@ -8,6 +8,7 @@ import ApiCodes from "../../common/api.codes";
 export default class AuthMiddleWare {
 	isAdmin = async (req, res, next) => {
 		const { role } = req.body;
+
 		try {
 			if (role < UserRoles.ADMIN) throw new ApiError(ApiCodes.FORBIDDEN, "관리자만 접근 가능합니다.");
 		} catch	(e: any) {
@@ -16,7 +17,7 @@ export default class AuthMiddleWare {
 
 			const result = Result.fail<Error>(e).toJson();
 			logger.res(httpStatus.OK, result, req);
-			res.status(httpStatus.OK).json(result);
+			return res.status(httpStatus.OK).json(result);
 		}
 
 		next();
@@ -33,7 +34,7 @@ export default class AuthMiddleWare {
 
 			const result = Result.fail<Error>(e).toJson();
 			logger.res(httpStatus.OK, result, req);
-			res.status(httpStatus.OK).json(result);
+			return res.status(httpStatus.OK).json(result);
 		}
 		next();
 	}
@@ -44,14 +45,14 @@ export default class AuthMiddleWare {
 		const user = user_id || author_id;
 
 		try {
-			if (id !== user && role !== UserRoles.ADMIN) throw new ApiError(ApiCodes.FORBIDDEN, "자신의 정보만 접근 가능합니다.");
+			if (id != user && role != UserRoles.ADMIN) throw new ApiError(ApiCodes.FORBIDDEN, "자신의 정보만 접근 가능합니다.");
 		} catch	(e: any) {
 			logger.err(JSON.stringify(e));
 			logger.error(e);
 
 			const result = Result.fail<Error>(e).toJson();
 			logger.res(httpStatus.OK, result, req);
-			res.status(httpStatus.OK).json(result);
+			return res.status(httpStatus.OK).json(result);
 		}
 		next();
 	}

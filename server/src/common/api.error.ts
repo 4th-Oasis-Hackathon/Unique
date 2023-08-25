@@ -1,9 +1,9 @@
 import tid from 'cls-rtracer';
-import * as os from 'server/node_modules/os';
+import * as os from '../../node_modules/os';
 import context from 'express-http-context';
 import { prune } from '../lib/utils';
 import fs from 'fs';
-import path from 'server/node_modules/path/path';
+import path from '../../node_modules/path/path';
 import appRoot from 'app-root-path';
 import logger from '../lib/logger';
 

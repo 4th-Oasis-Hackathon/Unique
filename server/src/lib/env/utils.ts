@@ -1,4 +1,4 @@
-import { join } from 'server/node_modules/path/path';
+import { join } from '../../../node_modules/path/path';
 import appRoot from 'app-root-path';
 
 export function getOsEnv(key: string): string {

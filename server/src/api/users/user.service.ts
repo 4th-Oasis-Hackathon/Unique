@@ -2,7 +2,6 @@ import { User } from '../../models/user.model';
 import { Post } from '../../models/posts.model';
 import PostState from '../../common/post.state';
 import MessageService from '../messages/message.service';
-import { Op } from 'sequelize';
 
 export default class UserService {
     get = async (id: string): Promise<User> => {
@@ -11,8 +10,10 @@ export default class UserService {
                 _id: id,
                 deleted_at: null,
             },
+            attributes: ['_id', 'name', 'email', 'role', 'region', 'notice', 'created_at'],
             include: [{
                 model: Post,
+                required: false,
                 as: 'posts',
                 where: {
                     author_id: id,
@@ -21,6 +22,7 @@ export default class UserService {
                 },
             }, {
                 model: Post,
+                required: false,
                 as: 'comments',
                 where: {
                     author_id: id,
@@ -51,43 +53,20 @@ export default class UserService {
         });
     }
 
-    messageList = async (userId: number): Promise<User> => {
-        const user: any = await User.findOne({
-            where: {
-                _id: userId,
-                deleted_at: null,
-            },
-            include: [{
-                model: Post,
-                as: 'messages',
-                where: {
-                    [Op.or]: [{
-                        author_id: userId,
-                    }, {
-                        receiver_id: userId,
-                    }],
-                    type: PostState.MESSAGE,
-                    deleted_at: null,
-                },
-                order: [['_id', 'DESC']],
-            }],
-        });
+    messageList = async (userId: number): Promise<any> => {
+        const messageList = await new MessageService().getByUserId(userId);
+        const messageMap: Map<number, any[]> = new Map();
 
-        const messages = user?.messages || [];
+        messageList?.forEach((message) => {
+            const another = message.author_id === userId ? message.receiver_id : message.author_id;
 
-        // 메시지를 사용자 별로 구분하는 작업 수행
-        const userMessageMap = new Map<number, Array<Post>>();
-
-        messages.forEach(message => {
-            const otherUserId = message.author_id === userId ? message.receiver_id : message.author_id;
-            if (!userMessageMap.has(otherUserId)) {
-                userMessageMap.set(otherUserId, []);
+            if (!messageMap.has(another)) {
+                messageMap.set(another, []);
             }
-            userMessageMap.get(otherUserId)?.push(message);
+            messageMap.get(another)?.push(message);
         });
 
-        user.messages = Array.from(userMessageMap.values());
-        return user;
+        return Array.from(messageMap.values());
     }
 
     sendMessage = async (userId: number, message: any): Promise<Post> => {

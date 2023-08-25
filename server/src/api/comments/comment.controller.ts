@@ -19,7 +19,7 @@ export default class CommentController {
             }
 
             const comment = await new CommentService().create(commentData);
-            result = Result.ok<any>(comment).toJson();
+            result = Result.ok<any>({comment}).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);
@@ -36,8 +36,12 @@ export default class CommentController {
         const { id } = req.params;
 
         try {
-            const comment = await new CommentService().delete(id);
-            result = Result.ok<any>(comment).toJson();
+            await new CommentService().delete(id);
+            result = Result.ok<any>({
+                comment: {
+                    _id: id
+                }
+            }).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);
@@ -54,8 +58,12 @@ export default class CommentController {
         const { id } = req.params;
 
         try {
-            const comment = await new CommentService().like(id);
-            result = Result.ok<any>(comment).toJson();
+            await new CommentService().like(id);
+            result = Result.ok<any>({
+                comment: {
+                    _id: id,
+                }
+            }).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);
@@ -72,8 +80,12 @@ export default class CommentController {
         const { id } = req.params;
 
         try {
-            const comment = await new CommentService().unlike(id);
-            result = Result.ok<any>(comment).toJson();
+            await new CommentService().unlike(id);
+            result = Result.ok<any>({
+                comment: {
+                    _id: id,
+                }
+            }).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);

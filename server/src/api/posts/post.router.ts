@@ -7,7 +7,7 @@ export const path = '/posts';
 export const router = Router();
 
 router.get('/', new PostController().list);
-router.post('/', new AuthMiddleWare().isUser, new MiddleWare().uploadImage.array('images'), new PostController().create);
+router.post('/', new MiddleWare().uploadImage.array('images'), new AuthMiddleWare().isUser, new PostController().create);
 router.get('/:id', new PostController().get);
 router.delete('/:id', new AuthMiddleWare().isAdmin, new PostController().delete);
 router.put('/:id/like', new AuthMiddleWare().isUser, new PostController().like);

@@ -35,7 +35,7 @@ export default class AuthController {
 
     login = async (req, res, next) => {
         let result;
-        const { email, password } = req.params;
+        const { email, password } = req.body;
 
         try {
             const user = await new AuthService().login(email, password);

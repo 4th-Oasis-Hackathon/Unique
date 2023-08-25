@@ -5,13 +5,21 @@ import PostState from '../../common/post.state';
 
 export default class PostService {
     list = async (attr: any): Promise<{ rows; count }> => {
-        const  where = {
-            ...attr,
-            deleted_at: null,
-        };
-
         return await Post.findAndCountAll({
-            where,
+            where: {
+                type: attr.type,
+                deleted_at: null,
+            },
+            include: [{
+                model: User,
+                required: false,
+                as: 'user',
+                attributes: ['_id', 'name', 'email', 'region', 'notice', 'created_at'],
+                where: {
+                    region: attr.region,
+                    deleted_at: null,
+                }
+            }],
             distinct: true,
             order: [['_id', 'DESC']],
         });
@@ -23,16 +31,21 @@ export default class PostService {
                 _id: id,
                 deleted_at: null,
             },
+            attributes: ['_id', 'author_id', 'author', 'title', 'content', 'files', 'likes', 'type', 'reported', 'created_at'],
             include: [{
                 model: Post,
+                required: false,
                 as: 'comments',
+                attributes: ['_id', 'author_id', 'author', 'content', 'likes', 'type', 'parent_id', 'created_at'],
                 where: {
                     parent_id: id,
                     deleted_at: null,
                 },
                 include: [{
                     model: Post,
+                    required: false,
                     as: 'reply_comments',
+                    attributes: ['_id', 'author_id', 'author', 'content', 'likes', 'type', 'parent_id', 'created_at'],
                     where: {
                         parent_id: col('comments._id'),
                         deleted_at: null,
@@ -59,6 +72,7 @@ export default class PostService {
     }
 
     like = async (id: number): Promise<[affectedCount: number]> => {
+        console.log(`like: ${id}`);
         return await Post.update({
             likes: literal('likes + 1')
         }, {
@@ -96,7 +110,7 @@ export default class PostService {
         const reportData = {
             author_id: reporter._id,
             author: reporter.name,
-            receiver_id: 0,
+            receiver_id: 1,
             type: PostState.MESSAGE,
             title: '게시글이 신고되었습니다.',
             content: `신고자: ${reporter.name}(${reporter.email})\n신고내용: ${content}\n신고게시글: ${reportedPost.title}\n신고게시글 내용: ${reportedPost.content}`,

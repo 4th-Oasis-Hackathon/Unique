@@ -37,6 +37,30 @@ export function initModels() {
     User.initModel(sequelize);
     Post.initModel(sequelize);
 
+    const userToPostOption = {
+        foreignKey: 'author_id',
+        sourceKey: '_id'
+    };
+
+    User.hasMany(Post, { ...userToPostOption, as: 'posts' });
+    User.hasMany(Post, { ...userToPostOption, as: 'comments' });
+    User.hasMany(Post, { ...userToPostOption, as: 'messages' });
+    Post.hasOne(User, {
+        foreignKey: '_id',
+        sourceKey: 'author_id',
+        as: 'user',
+    });
+    Post.hasMany(Post, {
+        foreignKey: 'parent_id',
+        sourceKey: '_id',
+        as: 'comments',
+    });
+    Post.hasMany(Post, {
+        foreignKey: 'parent_id',
+        sourceKey: '_id',
+        as: 'reply_comments',
+    });
+
 }
 
 export function connect() {

@@ -8,10 +8,10 @@ import PostState from '../../common/post.state';
 export default class UserController {
     get = async (req, res, next) => {
         let result;
-        const { id } = req.params;
+        const { user_id } = req.params;
 
         try {
-            const user = await new UserService().get(id);
+            const user = await new UserService().get(user_id);
             result = Result.ok<any>(user).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
@@ -26,7 +26,7 @@ export default class UserController {
 
     update = async (req, res, next) => {
         let result;
-        const { id } = req.params;
+        const { user_id } = req.params;
         const { region, notice } = req.body;
 
         try {
@@ -34,11 +34,11 @@ export default class UserController {
                 region,
                 notice,
             });
-            await new UserService().update(id, updateData);
+            await new UserService().update(user_id, updateData);
 
             result = Result.ok<any>({
                 user: {
-                    _id: id,
+                    _id: user_id,
                 }
             }).toJson();
         } catch (e: any) {
@@ -54,14 +54,14 @@ export default class UserController {
 
     delete = async (req, res, next) => {
         let result;
-        const { id } = req.params;
+        const { user_id } = req.params;
 
         try {
-            await new UserService().delete(id);
+            await new UserService().delete(user_id);
 
             result = Result.ok<any>({
                 user: {
-                    _id: id
+                    _id: user_id
                 }
             }).toJson();
         } catch (e: any) {
@@ -77,12 +77,12 @@ export default class UserController {
 
     message = async (req, res, next) => {
         let result;
-        const { id: userId } = req.params;
+        const { user_id: userId } = req.params;
 
         try {
-            const message = await new UserService().messageList(userId);
+            const messages = await new UserService().messageList(parseInt(userId));
 
-            result = Result.ok<any>(message).toJson();
+            result = Result.ok<any>({messages}).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
             logger.error(e);
@@ -96,7 +96,7 @@ export default class UserController {
 
     sendMessage = async (req, res, next) => {
         let result;
-        const { id: userId } = req.params;
+        const { user_id: userId } = req.params;
         const { receiver_id, title, content } = req.body;
 
         try {
@@ -106,7 +106,7 @@ export default class UserController {
                 content,
                 type: PostState.MESSAGE,
             });
-            const message = await new UserService().sendMessage(userId, messageData);
+            const message = await new UserService().sendMessage(parseInt(userId), messageData);
 
             result = Result.ok<any>(message).toJson();
         } catch (e: any) {

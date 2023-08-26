@@ -1,2 +1,17 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Community from './community.svelte';
+	import Edu from './edu.svelte';
+	import Footer from './footer.svelte';
+	import Info from './info.svelte';
+	import Intro from './intro.svelte';
+	import Meeting from './meeting.svelte';
+</script>
+
+<Intro />
+<Info />
+<Edu />
+<Community />
+<Meeting />
+<Footer />
+
+

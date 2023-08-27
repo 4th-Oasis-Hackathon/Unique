@@ -7,6 +7,7 @@ export class Post extends Model<IPost> implements IPost {
     _id?: number;
     author_id?: number; // Post, Comment, Message
     author?: string; // Post, Comment, Message
+    board?: string; // Post
     title?: string; // Post, Comment, Message, Notice
     content?: string; // Post, Comment, Message, Notice
 	files?: IFile[]; // Post, Notice
@@ -34,6 +35,10 @@ export class Post extends Model<IPost> implements IPost {
                     allowNull: true,
                 },
                 author: {
+                    type: DataTypes.STRING(100),
+                    allowNull: true,
+                },
+                board: {
                     type: DataTypes.STRING(100),
                     allowNull: true,
                 },

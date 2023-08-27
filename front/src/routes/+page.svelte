@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Community from './main/community.svelte';
-	import Edu from './main/edu.svelte';
 	import Footer from './main/footer.svelte';
 	import Info from './main/info.svelte';
 	import Intro from './main/intro.svelte';
@@ -11,7 +10,6 @@
 
 <Intro />
 <Info {data}/>
-<Edu />
 <Community {data}/>
 <Meeting />
 <Footer />

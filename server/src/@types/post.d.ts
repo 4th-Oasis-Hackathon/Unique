@@ -12,6 +12,7 @@ export interface IPost {
 
     // posts
     reported?: boolean;
+    board?: string;
 
 	// comments
 	parent_id?: number;

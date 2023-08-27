@@ -5,20 +5,25 @@ import { Result } from '../../common/result';
 import PostState from '../../common/post.state';
 import ApiError from '../../common/api.error';
 import ApiCodes from '../../common/api.codes';
+import { prune } from '../../lib/utils';
 
 export default class PostController {
     list = async (req, res, next) => {
         let result;
-        const region = req.query.region;
+        const { board, region } = req.query;
 
         try {
             if (!region) throw new ApiError(ApiCodes.BAD_REQUEST, "지역을 입력해주세요.");
-            const attr = {
-                region,
-                type: PostState.POST
-            }
+            const userAttr = prune({
+                region
+            });
 
-            const { rows: posts, count } = await new PostService().list(attr);
+            const postAttr = prune({
+                board,
+                type: PostState.POST
+            });
+
+            const { rows: posts, count } = await new PostService().list(postAttr, userAttr);
             result = Result.ok<any>({ count, posts }).toJson();
         } catch (e: any) {
             logger.err(JSON.stringify(e));
@@ -51,13 +56,14 @@ export default class PostController {
 
     create = async (req, res, next) => {
         let result;
-        const { title, content, author_id, author} = req.body;
+        const { title, content, board, author_id, author} = req.body;
         const files = req?.files;
 
         try {
             const postData = {
                 title,
                 content,
+                board,
                 files,
                 author_id,
                 author,

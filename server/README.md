@@ -19,6 +19,7 @@ CREATE TABLE posts (
     _id BIGINT AUTO_INCREMENT PRIMARY KEY,
     author_id BIGINT,
     author VARCHAR(100),
+    board VARCHAR(100),
     title VARCHAR(100),
     content VARCHAR(1024),
     files JSON,

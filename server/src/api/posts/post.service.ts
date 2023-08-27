@@ -4,25 +4,32 @@ import { User } from '../../models/user.model';
 import PostState from '../../common/post.state';
 
 export default class PostService {
-    list = async (attr: any): Promise<{ rows; count }> => {
-        return await Post.findAndCountAll({
+    list = async (postAttr, userAttr): Promise<{ rows; count }> => {
+        const users = await User.findAll({
             where: {
-                type: attr.type,
+                ...userAttr,
                 deleted_at: null,
             },
             include: [{
-                model: User,
-                required: false,
-                as: 'user',
-                attributes: ['_id', 'name', 'email', 'region', 'notice', 'created_at'],
+                model: Post,
+                required: true,
+                as: 'posts',
+                attributes: ['_id', 'author_id', 'author', 'board', 'title', 'content', 'files', 'likes', 'type', 'reported', 'created_at'],
                 where: {
-                    region: attr.region,
+                    ...postAttr,
                     deleted_at: null,
-                }
-            }],
-            distinct: true,
-            order: [['_id', 'DESC']],
+                },
+            }]
         });
+
+        const posts = users.reduce((acc, user: any) => {
+            return acc.concat(user.posts);
+        }, []);
+
+        return {
+            rows: posts,
+            count: posts.length,
+        };
     };
 
     get = async (id: number): Promise<Post> => {

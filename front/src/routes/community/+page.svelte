@@ -1,26 +1,69 @@
-<div class="intro">
-	<div class="container">
-		<h2>메인 소개 텍스트</h2>
-		<p>서브 소개 텍스트</p>
-	</div>
-</div>
+<script lang="ts">
+    import { page } from '$app/stores';
+    import Header from './header.svelte'
+
+    const navs = [
+        {
+            title: '전체',
+            href: '/info'
+        },
+
+        {
+            title: '중고장터',
+            href: '/edu'
+        },
+
+        {
+            title: '생활정보',
+            href: '/community'
+        },
+    ];
+    $: routeId = $page.route.id;
+
+</script>
+
+<Header />
+<nav>
+    <div class="container">
+        <div>
+
+            <ul>
+                {#each navs as { title, href }}
+                <li>
+                    <a {href} class:active={routeId == href} {title}>{title}</a>
+                </li>
+                {/each}
+            </ul>
+            
+        </div>   
+    </div>
+</nav>
+    
 
 <style>
-	
-	.intro {
-		padding: 5em 0;
-		background-color: rgba(255, 255, 255, 0.30000001192092896);
-		color: white;
+	nav {
+		padding: 1em;
+		color: rgba(255, 255, 255, 1);
 	}
-	
-	h2{
+	.container {
+		display: flex;
+		align-items: center;
+	}
+	ul {
+		display: flex;
+		list-style: none;
 		margin: 0;
-		margin-top: 0.8em;
-		font-size: 3em;
-		text-align: left;
+		margin-left: auto;
+		font-size: 1.8em;
 	}
-	
-	p {
-		font-size: 2em;
+	li {
+		margin-right: 20px;
+	}
+	a {
+		color: #aaa;
+		text-decoration: none;
+	}
+	.active {
+		color: white;
 	}
 </style>

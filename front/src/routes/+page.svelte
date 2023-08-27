@@ -1,16 +1,18 @@
 <script lang="ts">
-	import Community from './community.svelte';
-	import Edu from './edu.svelte';
-	import Footer from './footer.svelte';
-	import Info from './info.svelte';
-	import Intro from './intro.svelte';
-	import Meeting from './meeting.svelte';
+	import Community from './main/community.svelte';
+	import Edu from './main/edu.svelte';
+	import Footer from './main/footer.svelte';
+	import Info from './main/info.svelte';
+	import Intro from './main/intro.svelte';
+	import Meeting from './main/meeting.svelte';
+	export let data;
+	
 </script>
 
 <Intro />
-<Info />
+<Info {data}/>
 <Edu />
-<Community />
+<Community {data}/>
 <Meeting />
 <Footer />
 

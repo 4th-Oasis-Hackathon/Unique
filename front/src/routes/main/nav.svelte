@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 
+	const homeUrl = "/";
 	const navs = [
 		{
 			title: '우리정보',
@@ -27,8 +28,10 @@
 
 <nav>
 	<div class="container">
-		<a href="/" class="logo">Woorie</a>
-		<div class="navList">
+		<a href={homeUrl} class="logo">
+			<img src="/images/logo.png" alt="logo" />	
+		</a>
+		<div>
 			<ul>
 				{#each navs as { title, href }}
 					<li>
@@ -38,21 +41,22 @@
 			</ul>
 		</div>
 		<ul class="login">
-			<input />
 			<li>
-				<a href="/login">로그인</a>
+				<a href="/auth/login">로그인</a>
 			</li>
 		</ul>
 	</div>
 </nav>
 
 <style>
-	.logo {
-		color: white;
-		font-size: 2em;
+	img {
+		height: 70px;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
 	}
 	nav {
-		background-color: black;
+		border: black 1px solid;
 		padding: 1em;
 		color: rgba(255, 255, 255, 1);
 	}
@@ -71,13 +75,8 @@
 		margin-right: 20px;
 	}
 	a {
-		color: #aaa;
+		color: white;
 		text-decoration: none;
-	}
-	input {
-		background-color: rgba(217, 217, 217, 0.30000001192092896);
-		margin-right: 2em;
-		border: none;
 	}
 	.active {
 		color: white;

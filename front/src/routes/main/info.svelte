@@ -1,10 +1,7 @@
 <script lang="ts">
-	const getPosts = async (region: string) => {
-  	const url = `http://localhost:5500/posts?region=${region}`; 
-  	const res = await fetch(url);
-  	const data = await res.json();
-  	return data.result.posts;
-}
+	export let data;
+
+const {posts} = data;	
 </script>
 
 <div class="info">
@@ -15,9 +12,6 @@
 </div>
 
 <div class="container">
-	{#await getPosts('suncheon')}
-		<p>Loading...</p>
-	{:then posts}
 	<div class="grid">
 	{#each posts as post}
 		<div>
@@ -26,7 +20,6 @@
 		</div>
 	{/each}
 	</div>
-	{/await}
 </div>
 
 

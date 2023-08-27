@@ -11,7 +11,7 @@
             <div class="right">
                 <h1>로그인</h1>
                 <div class="form-group">
-                    <input type="email" name="eamil" id="email" placeholder="이메일을 입력하세요.">
+                    <input type="email" name="email" id="email" placeholder="이메일을 입력하세요.">
                 </div>
                 
                 <div class="form-group">
@@ -23,7 +23,7 @@
                 </div>
                 
                 <div class="help">
-                    <a href="#">
+                    <a href="/">
                         <p>비밀번호를 잊으셨나요?</p>
                     </a>
                     

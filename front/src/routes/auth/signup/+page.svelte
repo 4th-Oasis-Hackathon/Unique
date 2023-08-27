@@ -52,7 +52,7 @@
                 </div>
                 
                 <div class="help">
-                    <a href="/">
+                    <a href="/auth/login">
                         <p>이미 아이디가 있으신가요? <span>로그인</span></p>
                     </a>
                 </div>

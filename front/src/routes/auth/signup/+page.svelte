@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="email" name="eamil" id="email" placeholder="이메일을 입력하세요.">
+                    <input type="email" name="email" id="email" placeholder="이메일을 입력하세요.">
                 </div>
                 
                 <div class="form-group">
@@ -56,9 +56,8 @@
                         <p>이미 아이디가 있으신가요? <span>로그인</span></p>
                     </a>
                 </div>
-            
 
-                <img src="/images/loginsns.png" alt="sns" class="snsimage">
+                <input type="hidden" name="selectedRegion" value={selectedRegion}>
             </div>
         </div>
     </div>

@@ -12,7 +12,7 @@
 <div class="container">
     <form method="post">
         <div class="grid">
-            <img src="/images/auth.png" alt="사진">
+            <img src="/images/auth.png" alt="사진" class="pe">
             <div class="right">
                 <h1>회원가입</h1>
                 <div class="form-group">
@@ -83,7 +83,7 @@
         color: white;
         font-size: 3em;
     }
-    img {
+    .pe {
         width: 900px;
         height: 605px;
 		object-fit: cover;
@@ -128,12 +128,6 @@
         text-decoration: none;
         color: #B0B0B0;
         text-align: end;
-    }
-    .snsimage {
-        width: 13%;
-        object-fit: cover;
-		object-position: center;
-        align-self: center;
     }
     span {
         font-weight: bold;

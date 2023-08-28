@@ -9,11 +9,6 @@
 		},
 
 		{
-			title: '우리교육',
-			href: '/edu'
-		},
-
-		{
 			title: '커뮤니티',
 			href: '/community'
 		},
@@ -24,12 +19,13 @@
 		}
 	];
 	$: routeId = $page.route.id;
+
 </script>
 
 <nav>
 	<div class="container">
 		<a href={homeUrl} class="logo">
-			<img src="/images/logo.png" alt="logo" />	
+			<img src="/images/logo.png" alt="logo" class="logoimg"/>	
 		</a>
 		<div>
 			<ul>
@@ -40,16 +36,37 @@
 				{/each}
 			</ul>
 		</div>
-		<ul class="login">
-			<li>
-				<a href="/auth/login">로그인</a>
-			</li>
-		</ul>
+		{#if $page.data.user}
+		<div class="box">
+			<ul class="login">
+				<li>
+					<img src="/images/alarm.png" alt="알람">
+				</li>
+				
+				<li>
+					<img src="/images/message.png" alt="메세지">
+				</li>
+				
+				<li>
+					<img src="/images/profile.png" alt="사용자 정보">
+				</li>
+			</ul>
+		</div>
+		{:else}
+		<div class="box">
+			<ul class="login">
+				<li>
+					<a href="/auth/login">로그인</a>
+				</li>
+			</ul>
+		</div>
+		{/if}
+		
 	</div>
 </nav>
 
 <style>
-	img {
+	.logoimg {
 		height: 70px;
 		width: 100%;
 		object-fit: cover;
@@ -80,5 +97,13 @@
 	}
 	.active {
 		color: white;
+	}
+	img {
+		width: 35px;
+		object-fit: cover;
+		object-position: center;
+	}
+	.box {
+		margin-left: 500px;
 	}
 </style>

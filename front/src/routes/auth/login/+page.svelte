@@ -1,13 +1,12 @@
 <script lang="ts">
 	import Button from "$lib/button.svelte";
 
-
 </script>
 
 <div class="container">
     <form method="post">
         <div class="grid">
-            <img src="/images/auth.png" alt="사진">
+            <img src="/images/auth.png" alt="사진" class="pe">
             <div class="right">
                 <h1>로그인</h1>
                 <div class="form-group">
@@ -40,7 +39,7 @@
             </div>
         </div>
     </div>
-    
+<footer />
     <style>
     .container{
         display: flex;
@@ -62,7 +61,7 @@
         color: white;
         font-size: 3em;
     }
-    img {
+    .pe {
         width: 900px;
         height: 605px;
 		object-fit: cover;

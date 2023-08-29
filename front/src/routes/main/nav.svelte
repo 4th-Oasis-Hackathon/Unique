@@ -92,7 +92,7 @@
 		margin-right: 20px;
 	}
 	a {
-		color: white;
+		color: gray;
 		text-decoration: none;
 	}
 	.active {

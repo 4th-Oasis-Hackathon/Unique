@@ -1,13 +1,11 @@
 <script lang="ts">
 	export let data;
 
-const {posts} = data;
+let {posts} = data;
 </script>
 
 <div class="community">
-	<h1>커뮤니티</h1>
-	<h2>커뮤니티 탭 내용 소개</h2>
-	<h2>커뮤니티 탭 내용 소개</h2>
+	<h3>많이 찾는 글</h3>
 </div>
 
 <div class="container">
@@ -61,12 +59,6 @@ const {posts} = data;
 		margin: 0;
 		margin-top: auto;
 		font-size: 1em;
-		text-align: center;
-	}
-	h2 {
-		margin: 0;
-		margin-top: 0.5em;
-		font-size: 3em;
 		text-align: center;
 	}
 	img {

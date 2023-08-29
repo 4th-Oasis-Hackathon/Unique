@@ -1,14 +1,14 @@
 <script lang="ts">
 	export let data;
 
-const {posts} = data;	
+	let {posts} = data;
+
 </script>
 
 <div class="info">
 	<h1>우리 정보</h1>
 	<h2>우리정보 탭 내용 소개 2줄</h2>
 	<h2>우리정보 탭 내용 소개 2줄</h2>
-	<grid />
 </div>
 
 <div class="container">

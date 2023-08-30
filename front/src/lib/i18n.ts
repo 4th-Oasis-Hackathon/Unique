@@ -11,6 +11,6 @@ addMessages('vn', vn);
 addMessages('ko', ko);
 
 init({
-	fallbackLocale: 'ko',
+	fallbackLocale: 'ko-kr',
 	initialLocale: getLocaleFromNavigator(),
 });

@@ -1,8 +1,8 @@
 <script lang="ts">
     import {selectedCategory} from '$lib/store'
-    import { _ } from 'svelte-i18n'
+    import { _, locale, isLoading, locales } from 'svelte-i18n'
 
-    const navs = [
+    $: navs = [
         {
             category: $_('category.living_info'),
         },
@@ -33,14 +33,26 @@
 <nav>
     <div class="container">
         <div>
-            <ul>
-                {#each navs as { category }}
-                <li>
-                    <button class:active={$selectedCategory === category} on:click={() => handleNavClick(category)}>{category}</button>
-                </li>
+            <select bind:value={$locale}>
+                {#each $locales as locale}
+                  <option value={locale}>{locale}</option>
                 {/each}
-            </ul>
+            </select>
         </div>
+        <div>
+            {#if $isLoading}
+                Please wait...
+            {:else}
+                <ul>
+                    {#each navs as { category }}
+                    <li>
+                        <button class:active={$selectedCategory === category} on:click={() => handleNavClick(category)}>{category}</button>
+                    </li>
+                    {/each}
+                </ul>
+             {/if}
+        </div>
+
         <div>
             <ul>
                 <li>
@@ -95,4 +107,19 @@
         background-color:  #B6B6B6;
         color: #7F7F7F;
     }
+
+    select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    width: 200px;
+  }
+
+  option {
+    padding: 8px;
+    font-size: 16px;
+  }
 </style>

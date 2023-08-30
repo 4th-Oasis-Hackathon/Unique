@@ -1,0 +1,9 @@
+{
+	"category": {
+		"living_info": "生活信息",
+		"event_info": "活动信息",
+		"thrift_shop": "旧货店",
+		"medical_info": "医疗信息",
+		"nationality_acquisition_info": "国籍获取信息"
+	}
+}

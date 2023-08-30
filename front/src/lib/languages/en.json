@@ -1,0 +1,9 @@
+{
+	"category": {
+		"living_info": "Living Information",
+		"event_info": "Event Information",
+		"thrift_shop": "Thrift Shop",
+		"medical_info": "Medical Information",
+		"nationality_acquisition_info": "Nationality Acquisition Information"
+	}
+}

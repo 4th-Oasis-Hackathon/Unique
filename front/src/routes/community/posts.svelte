@@ -1,25 +1,26 @@
 <script lang="ts">
     import {selectedCategory} from '$lib/store'
+    import { _ } from 'svelte-i18n'
 
     const navs = [
         {
-            category: '생활정보',
+            category: $_('category.living_info'),
         },
 
         {
-            category: '행사정보',
+            category: $_('category.event_info'),
         },
 
         {
-            category: '중고장터',
+            category: $_('category.thrift_shop'),
         },
 
         {
-            category: '의료정보',
+            category: $_('category.medical_info'),
         },
 
         {
-            category: '국적취득',
+            category: $_('category.nationality_acquisition_info'),
         },
     ];
 
@@ -47,7 +48,7 @@
                 </li>
             </ul>
         </div>
-    </div>   
+    </div>
 </nav>
 
 <style>
@@ -67,7 +68,7 @@
 		margin: 0;
 		margin-left: -1em;
 		font-size: 3em;
-        
+
 	}
     button {
         display: flex;

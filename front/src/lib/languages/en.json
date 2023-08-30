@@ -3,5 +3,10 @@
 		"free_board": "Free Board",
 		"thrift_shop": "Thrift Shop",
 		"job_board": "Job Board"
+	},
+	"title": {
+		"news": "Uri News",
+		"communication": "Uri Communication",
+		"traning": "Online Traning"
 	}
 }

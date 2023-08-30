@@ -1,20 +1,21 @@
 <script>
+	import { _, locale, isLoading, locales } from 'svelte-i18n';
 	import { page } from '$app/stores';
 
 	const homeUrl = "/";
-	const navs = [
+	$: navs = [
 		{
-			title: '우리정보',
+			title: $_('title.news'),
 			href: '/info'
 		},
 
 		{
-			title: '커뮤니티',
+			title: $_('title.communication'),
 			href: '/community'
 		},
 
 		{
-			title: '온라인 미팅',
+			title: $_('title.traning'),
 			href: '/meeting'
 		}
 	];
@@ -25,16 +26,20 @@
 <nav>
 	<div class="container">
 		<a href={homeUrl} class="logo">
-			<img src="/images/logo.png" alt="logo" class="logoimg"/>	
+			<img src="/images/logo.png" alt="logo" class="logoimg"/>
 		</a>
 		<div>
-			<ul>
-				{#each navs as { title, href }}
-					<li>
-						<a {href} class:active={routeId == href} {title}>{title}</a>
-					</li>
-				{/each}
-			</ul>
+            {#if $isLoading}
+                Please wait...
+            {:else}
+				<ul>
+					{#each navs as { title, href }}
+						<li>
+							<a {href} class:active={routeId == href} {title}>{title}</a>
+						</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
 		{#if $page.data.user}
 		<div class="box">
@@ -42,11 +47,11 @@
 				<li>
 					<img src="/images/alarm.png" alt="알람">
 				</li>
-				
+
 				<li>
 					<img src="/images/message.png" alt="메세지">
 				</li>
-				
+
 				<li>
 					<img src="/images/profile.png" alt="사용자 정보">
 				</li>
@@ -61,7 +66,13 @@
 			</ul>
 		</div>
 		{/if}
-		
+        <div>
+            <select bind:value={$locale}>
+                {#each $locales as locale}
+                  <option value={locale}>{locale}</option>
+                {/each}
+            </select>
+        </div>
 	</div>
 </nav>
 
@@ -106,4 +117,19 @@
 	.box {
 		margin-left: 500px;
 	}
+
+    select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    width: 200px;
+  }
+
+  option {
+    padding: 8px;
+    font-size: 16px;
+  }
 </style>

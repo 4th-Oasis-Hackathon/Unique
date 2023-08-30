@@ -23,13 +23,6 @@
 <nav>
     <div class="container">
         <div>
-            <select bind:value={$locale}>
-                {#each $locales as locale}
-                  <option value={locale}>{locale}</option>
-                {/each}
-            </select>
-        </div>
-        <div>
             {#if $isLoading}
                 Please wait...
             {:else}
@@ -97,19 +90,4 @@
         background-color:  #B6B6B6;
         color: #7F7F7F;
     }
-
-    select {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-    width: 200px;
-  }
-
-  option {
-    padding: 8px;
-    font-size: 16px;
-  }
 </style>

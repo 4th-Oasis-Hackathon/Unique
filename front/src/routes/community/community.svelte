@@ -8,7 +8,6 @@
 	const fetchPosts = async (category: string) => {
 		const data = await getAllPosts(category);
 		posts = Array.isArray(data.posts) ? data.posts : [];
-		console.log("Fetched posts: ", posts[0]._id);
 	};
 
 	onMount(() => {
@@ -27,12 +26,12 @@
 	{#each posts as post}
 		<div class='gridIn'>
 			<div>
-				<a href={`/post/${post._id}`}>
+				<a href={`/community/${post._id}`}>
 				<img src="/images/커뮤니티1.png" alt="{post.title}">
 				</a>
 			</div>
 			<div>
-				<a href={`/post/${post._id}`}>
+				<a href={`/community/${post._id}`}>
 				<h1 class="title">
             {#if post.title.length > 25}
                 {post.title.slice(0, 25) + '...'}

@@ -26,8 +26,6 @@ export const actions = {
 				req.append('images', image, `image_${index}`);
 			});
 
-			console.log(req);
-
 			const url = `http://localhost:5500/posts?region=suncheon`;
 			const options = {
 				method: 'POST',

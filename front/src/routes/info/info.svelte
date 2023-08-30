@@ -1,17 +1,14 @@
 <script lang="ts">
 	import {getAllPosts} from '$lib/api'
-	async function boardByposts() {
-		const data = await getAllPosts('국적취득정보');
-		return data.posts
-	}
+	import { onMount } from 'svelte';
+	
 	let posts: any[] = [];
 
-    (async () => {
-        posts = await boardByposts();
-    })();
-
-	console.log(posts)
-	
+	onMount(async () => {
+		const data = await getAllPosts('국적취득정보');
+		posts = Array.isArray(data.posts) ? data.posts : [];
+		console.log('info.svelte:',posts);
+	});
 </script>
 
 <div class="info">

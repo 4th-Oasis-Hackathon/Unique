@@ -34,7 +34,7 @@
                 <option value="">분류를 선택해주세요</option>
                 <option value="자유게시판">자유 게시판</option>
                 <option value="중고장터">중고장터</option>
-                <option value="채용게시판">채용 게시판</option>
+                <option value="채용정보">채용정보</option>
             </select>
 
             <div class="inputBox">

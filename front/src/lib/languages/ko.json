@@ -2,11 +2,11 @@
 	"category": {
 		"free_board": "자유 게시판",
 		"thrift_shop": "중고장터",
-		"job_board": "채용 게시판"
+		"job_board": "채용정보"
 	},
 	"title": {
 		"news": "우리뉴스",
 		"communication": "우리소통",
-		"traning": "온라인 교육"
+		"traning": "화상교육"
 	}
 }

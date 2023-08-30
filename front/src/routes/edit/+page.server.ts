@@ -37,7 +37,7 @@ export const actions = {
 			const api = await res.json();
 
 			if (api.code === 2000) {
-				redirect(302, '/community');
+				throw redirect(302, '/community');
 			}
 		}
 	}

@@ -1,3 +1,5 @@
+import { redirect } from "@sveltejs/kit";
+
 export const actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
@@ -25,6 +27,10 @@ export const actions = {
 			body: JSON.stringify(userData)
 		};
 
-		await fetch(url, options);
+		const result = await fetch(url, options);
+		const data = await result.json();
+		if (data.code === 2000) {
+			throw redirect(303, '/auth/login');
+		}
 	}
 };

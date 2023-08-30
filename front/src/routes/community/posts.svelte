@@ -1,6 +1,6 @@
 <script lang="ts">
     import {selectedCategory} from '$lib/store'
-    import { _, locale, isLoading, locales } from 'svelte-i18n'
+    import { _, isLoading } from 'svelte-i18n'
 
     $: navs = [
         {

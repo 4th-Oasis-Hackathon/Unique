@@ -11,7 +11,7 @@
 
   function onChange() {
     const file = input.files[0];
-		
+
     if (file) {
 			showImage = true;
 
@@ -20,25 +20,23 @@
         image.setAttribute("src", reader.result);
       });
       reader.readAsDataURL(file);
-			
+
 			return;
-    } 
-		showImage = false; 
+    }
+		showImage = false;
   }
 </script>
 
 <div class="container">
     <form method="post" use:enhance enctype="multipart/form-data">
         <div class="inner">
-            <select name="category", id="category">
+            <select name="category" id="category">
                 <option value="">분류를 선택해주세요</option>
-                <option value="생활정보",>생활정보</option>
-                <option value="행사정보">행사정보</option>
+                <option value="자유게시판">자유 게시판</option>
                 <option value="중고장터">중고장터</option>
-                <option value="의료정보">의료정보</option>
-                <option value="국적취득">국적취득</option>
+                <option value="채용게시판">채용 게시판</option>
             </select>
-            
+
             <div class="inputBox">
                 <textarea class="title" name="title" id="title" placeholder="제목을 입력해주세요"></textarea>
             </div>
@@ -46,7 +44,7 @@
                 <textarea class="content" name="content" id="content"   placeholder="내용을 입력해주세요"></textarea>
             </div>
 
-            
+
             <div class='bottom'>
                 <div class="form">
                     <button class="exit">
@@ -134,9 +132,9 @@
         font-size: 2em;
         border: none;
         background-color: #5A5A5A;
-        color: white;  
+        color: white;
         margin-top: 23px;
-        margin-left: 10px;     
+        margin-left: 10px;
         cursor: pointer;
     }
     .load {
@@ -194,5 +192,5 @@
     color: white;
 }
 
-    
+
 </style>

@@ -4,7 +4,7 @@
 	import Info from './info/info.svelte';
 	import Intro from './main/intro.svelte';
 	import Meeting from './meeting/meeting.svelte';
-	
+	import '$lib/i18n';
 </script>
 
 <Intro />

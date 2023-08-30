@@ -1,14 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
-// export const load = async (e) => {
-// 	let image = e.target.files[0];
-// 	let reader = new FileReader();
-// 	reader.readAsDataURL(image);
-// 	reader.onload = (e) => {
-// 		avatar = e.target.result;
-// 	};
-// };
-
 export const actions = {
 	default: async (event) => {
 		const session = event.cookies.get('session');
@@ -17,32 +8,30 @@ export const actions = {
 		} else {
 			const userInfo = JSON.parse(session);
 			const formData = await event.request.formData();
+			const req = new FormData();
 
 			const title = formData.get('title');
 			const content = formData.get('content');
 			const category = formData.get('category');
-			const imgae = formData.get('image');
+			const images = formData.getAll('image');
 
-			console.log(formData);
-			console.log(imgae);
+			req.append('title', title);
+			req.append('content', content);
+			req.append('board', category);
+			req.append('author', userInfo.name);
+			req.append('author_id', userInfo.id);
+			req.append('role', '2');
 
-			const data = {
-				title: title,
-				content: content,
-				board: category,
-				author: userInfo.name,
-				author_id: userInfo.id,
-				imgaes: imgae,
-				role: 1
-			};
-			console.log(data);
+			images.forEach((image, index) => {
+				req.append('images', image, `image_${index}`);
+			});
+
+			console.log(req);
+
 			const url = `http://localhost:5500/posts?region=suncheon`;
 			const options = {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>'
-				},
-				body: JSON.stringify(data)
+				body: req
 			};
 			const res = await fetch(url, options);
 			const api = await res.json();

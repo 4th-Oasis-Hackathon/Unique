@@ -38,29 +38,24 @@
                 <option value="의료정보">의료정보</option>
                 <option value="국적취득">국적취득</option>
             </select>
+            
             <div class="inputBox">
                 <textarea class="title" name="title" id="title" placeholder="제목을 입력해주세요"></textarea>
             </div>
             <div class="inputBox" bind:this={container}>
                 <textarea class="content" name="content" id="content"   placeholder="내용을 입력해주세요"></textarea>
             </div>
-            <div>
-                {#if showImage}
-                    <img bind:this={image} src="" alt="Preview" />
-	            {/if}
-            </div>
+
+            
             <div class='bottom'>
                 <div class="form">
-                    
                     <button class="exit">
                         나가기
                     </button>
-                    
-                    <div>
+                    <div class="right-buttons">
                         <button class="load">
                             임시저장
                         </button>
-                        
                         <button type="submit" class="save">
                             작성완료
                         </button>
@@ -70,13 +65,10 @@
         </div>
         <input bind:this={input}
 	on:change={onChange}
-  type="file" id="image" name="image"/>
+  type="file" id="image" name="image" class="floating-button"/>
     </form>
-    </div>
-    
-    
-    
-    
+</div>
+
 <style>
     .container{
         display: flex;
@@ -137,7 +129,6 @@
         justify-content: center;
         height: 8.8vh;
         margin: 1em;
-
     }
     .exit {
         font-size: 2em;
@@ -167,8 +158,41 @@
         padding: 0.3em;
         cursor: pointer;
     }
-    img {
+    .form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    }
+}
+
+.right-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #B7E23F;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.floating-button::before {
+    content: "+";
+    font-size: 24px;
+    color: white;
+}
+
     
 </style>

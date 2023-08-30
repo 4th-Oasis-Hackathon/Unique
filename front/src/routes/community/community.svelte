@@ -1,17 +1,23 @@
 <script lang="ts">
 	import {getAllPosts} from '$lib/api'
 	import {selectedCategory} from '$lib/store'
+	import { onMount } from 'svelte';
 
-	async function boardByposts() {
-		const data = await getAllPosts($selectedCategory);
-		return data.posts
-	}
 	let posts: any[] = [];
 
-    (async () => {
-        posts = await boardByposts();
-    })();
+	const fetchPosts = async (category: string) => {
+		const data = await getAllPosts(category);
+		posts = Array.isArray(data.posts) ? data.posts : [];
+		console.log("Fetched posts: ", posts[0]._id);
+	};
 
+	onMount(() => {
+		fetchPosts($selectedCategory);
+	});
+
+	$: {
+		fetchPosts($selectedCategory);
+	}
 	
 </script>
 
@@ -21,9 +27,12 @@
 	{#each posts as post}
 		<div class='gridIn'>
 			<div>
-				<img src="images/logo.png" alt="{post.title}">
+				<a href={`/post/${post._id}`}>
+				<img src="/images/커뮤니티1.png" alt="{post.title}">
+				</a>
 			</div>
 			<div>
+				<a href={`/post/${post._id}`}>
 				<h1 class="title">
             {#if post.title.length > 25}
                 {post.title.slice(0, 25) + '...'}
@@ -32,6 +41,7 @@
             {/if}
 				</h1>
 			<p>{post.content}</p>
+		</a>
 			</div>
 		</div>
 	{/each}
@@ -73,5 +83,8 @@
 	p{
 		text-align: left;
 		color: white;
+	}
+	a {
+		text-decoration: none;
 	}
 </style>

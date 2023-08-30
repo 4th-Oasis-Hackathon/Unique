@@ -1,15 +1,16 @@
 <script lang="ts">
 	import Footer from '../main/footer.svelte';
     import Header from './header.svelte'
-	import Nav from './posts.svelte';
     import Posts from './community.svelte';
-
-    export let data;
+	import Floating from './floating.svelte';
+    import Tag from './posts.svelte';
 
     
 </script>
 
+
 <Header />
-<Nav />
-<Posts {data}/>
+<Tag />
+<Posts />
 <Footer />
+<Floating />

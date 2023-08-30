@@ -1,91 +1,82 @@
-<script lang="ts">
-import { goto } from '$app/navigation';
-import { page } from '$app/stores';
+<script>
+	import { enhance } from "$app/forms";
 
-let title = '';
-let content = '';
-const region = $page.data.user.region;
+    let input;
+    let container;
+    let image;
+    let placeholder;
+	let showImage = false;
 
-function handleExitClick() {
-    goto('/community');
+
+
+  function onChange() {
+    const file = input.files[0];
+		
+    if (file) {
+			showImage = true;
+
+      const reader = new FileReader();
+      reader.addEventListener("load", function () {
+        image.setAttribute("src", reader.result);
+      });
+      reader.readAsDataURL(file);
+			
+			return;
+    } 
+		showImage = false; 
   }
-
-  function handleSaveClick() {
-    // API 호출
-    fetch(`http://localhost:5500/posts?region=${region}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        role:$page.data.user.role,
-        title: title,
-        content: content,
-        auth: $page.data.user.name,
-        author_id: $page.data.user.id,
-        image: , 
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch(error => {
-      console.error('API 호출 오류:', error);
-    });
-  }
-
-
-
 </script>
 
 <div class="container">
-    <div class="inner">
-
-        <select>
-            <option value="">분류를 선택해주세요</option>
-            <option value="생활정보">생활정보</option>
-            <option value="행사정보">행사정보</option>
-            <option value="중고장터">중고장터</option>
-            <option value="의료정보">의료정보</option>
-            <option value="국적취득">국적취득</option>
-        </select>
-
-        <div class="inputBox">
-            <textarea class="title" bind:value={title} name="title" id="title" placeholder="제목을 입력해주세요"></textarea>
-        </div>
-
-        <div class="inputBox">
-            <textarea class="content" bind:value={content} name="content" id="content" placeholder="내용을 입력해주세요"></textarea>
-        </div>
-        <div class='bottom'>
-            <div class="form">
-
-                <button class="exit" on:click={handleExitClick}>
-                    나가기
-                </button>
-                
-                <div>
-                    <button class="load">
-                        임시저장
-                    </button>
-                    
-                    <button class="save" on:click={handleSaveClick}>
-                        작성완료
-                    </button>
-                </div>
-
+    <form method="post" use:enhance enctype="multipart/form-data">
+        <div class="inner">
+            <select name="category", id="category">
+                <option value="">분류를 선택해주세요</option>
+                <option value="생활정보",>생활정보</option>
+                <option value="행사정보">행사정보</option>
+                <option value="중고장터">중고장터</option>
+                <option value="의료정보">의료정보</option>
+                <option value="국적취득">국적취득</option>
+            </select>
+            <div class="inputBox">
+                <textarea class="title" name="title" id="title" placeholder="제목을 입력해주세요"></textarea>
+            </div>
+            <div class="inputBox" bind:this={container}>
+                <textarea class="content" name="content" id="content"   placeholder="내용을 입력해주세요"></textarea>
             </div>
             <div>
-
+                {#if showImage}
+                    <img bind:this={image} src="" alt="Preview" />
+	            {/if}
             </div>
-            
-            
+            <div class='bottom'>
+                <div class="form">
+                    
+                    <button class="exit">
+                        나가기
+                    </button>
+                    
+                    <div>
+                        <button class="load">
+                            임시저장
+                        </button>
+                        
+                        <button type="submit" class="save">
+                            작성완료
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+        <input bind:this={input}
+	on:change={onChange}
+  type="file" id="image" name="image"/>
+    </form>
     </div>
-</div>
-
-
+    
+    
+    
+    
 <style>
     .container{
         display: flex;
@@ -107,6 +98,7 @@ function handleExitClick() {
         padding: 0.4em;
         margin-left: 4.8em;
     }
+
     .inner {
         height: 100%;
         margin-top: 130px;
@@ -175,9 +167,8 @@ function handleExitClick() {
         padding: 0.3em;
         cursor: pointer;
     }
-    .form {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 10px;
+    img {
+    width: 100%;
     }
+    
 </style>

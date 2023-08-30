@@ -9,7 +9,7 @@
 	
 	.intro {
 		padding: 5em 0;
-		background-color: rgba(255, 255, 255, 0.30000001192092896);
+		background-color: rgba(255, 255, 255, 0.3);
 		color: white;
 	}
 	

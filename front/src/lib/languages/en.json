@@ -1,9 +1,7 @@
 {
 	"category": {
-		"living_info": "Living Information",
-		"event_info": "Event Information",
+		"free_board": "Free Board",
 		"thrift_shop": "Thrift Shop",
-		"medical_info": "Medical Information",
-		"nationality_acquisition_info": "Nationality Acquisition Information"
+		"job_board": "Job Board"
 	}
 }

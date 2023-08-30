@@ -1,9 +1,7 @@
 {
 	"category": {
-		"living_info": "Thông tin cuộc sống",
-		"event_info": "thông tin sự kiện",
+		"free_board": "Bảng miễn phí",
 		"thrift_shop": "Cửa hàng tiết kiệm",
-		"medical_info": "Thông tin y tế",
-		"nationality_acquisition_info": "Thông tin cấp quốc tịch"
+		"job_board": "Bảng tin tuyển dụng"
 	}
 }

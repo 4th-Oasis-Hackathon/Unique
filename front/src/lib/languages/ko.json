@@ -1,9 +1,7 @@
 {
 	"category": {
-		"living_info": "생활정보",
-		"event_info": "행사정보",
+		"free_board": "자유 게시판",
 		"thrift_shop": "중고장터",
-		"medical_info": "의료정보",
-		"nationality_acquisition_info": "국적취득"
+		"job_board": "채용 게시판"
 	}
 }

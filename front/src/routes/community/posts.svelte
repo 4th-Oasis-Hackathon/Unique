@@ -4,23 +4,13 @@
 
     $: navs = [
         {
-            category: $_('category.living_info'),
+            category: $_('category.free_board'),
         },
-
-        {
-            category: $_('category.event_info'),
-        },
-
         {
             category: $_('category.thrift_shop'),
         },
-
         {
-            category: $_('category.medical_info'),
-        },
-
-        {
-            category: $_('category.nationality_acquisition_info'),
+            category: $_('category.job_board'),
         },
     ];
 
